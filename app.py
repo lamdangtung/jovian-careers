@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 """
 The variable __name__ is passed as first argument when creating an instance of the Flask object (a Python Flask application). 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return render_template('home.html')
 
 
 @app.route("/profile/<userId>")
