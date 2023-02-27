@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "bootstrap.html" %}
+    <title>{{job.title}} - Jovian Careers</title>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    {% include "banner.html" %}
+
+    <div class="container mb-48">
+        <h1 class="text-center mt-2 mb-4">
+            Jovian Careers Careers
+        </h1>
+        <h3>
+            {{job.title}}
+        </h3>
+
+        <p class="lead">
+            {{job.location}}
+        </p>
+        <h3>Responsibilities</h3>
+        <ul>
+            {% for responsibility in job.responsibilities.split("\n") %}
+            <li>{{responsibility}}</li>
+            {% endfor %}
+        </ul>
+        <h3>Requirements</h3>
+        <ul>
+            {% for requirement in job.requirements.split("\n") %}
+            <li>{{requirement}}</li>
+            {% endfor %}
+        </ul>
+        <h3>Salary</h3>
+        <p>
+            {{job.currency}}{{job.salary}}
+        </p>
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>
+
+Bachelor's degree (required) or above in Computer Science, Mathematics, Economics, or experience in related analytical
+field
+Excellent analytic and creative problem-solving skills 1-3 years Python and SQL programming experience
+Basic skills in MS Excel
+Knowledge of cloud computing platforms (AWS, GCP) and knowledge of Spark is desired

@@ -1,5 +1,6 @@
 import os
 import pymysql
+import json
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 load_dotenv()
@@ -20,7 +21,17 @@ conn = engine.connect()
 def getAllJobs():
     sql_query = "select * from jobs"
     result = conn.execute(text(sql_query))
-    result_dicts = []
-    for row in result:
-        result_dicts.append(row._mapping)
-    return result_dicts
+    jobs = []
+    for row in result.fetchall():
+        jobs.append(row._asdict())
+    return jobs
+
+
+def getJobById(jobId):
+    result = conn.execute(
+        text("select * from jobs where id =:id"), {"id": jobId})
+    rows = result.fetchall()
+    if (rows.count == 0):
+        return None
+    else:
+        return rows[0]._asdict()
