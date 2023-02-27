@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify
-from database import getAllJobs, getJobById
+from flask import Flask, render_template, jsonify, request
+from database import getAllJobs, getJobById, addApplication
 import json
 """
 The variable __name__ is passed as first argument when creating an instance of the Flask object (a Python Flask application). 
@@ -18,6 +18,14 @@ def show_home_page():
 def show_detail_job_page(jobId):
     job = getJobById(jobId)
     return render_template('job_detail.html', job=job)
+
+
+@app.route("/job/<jobId>/apply", methods=['post'])
+def apply_to_job(jobId):
+    data = request.form
+    job = getJobById(jobId)
+    addApplication(data, jobId)
+    return render_template('application_submitted.html', application=data, job=job)
 
 # API
 
